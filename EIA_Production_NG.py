@@ -1,5 +1,4 @@
 #US Natural Gas Production
-import pandas as pd
 import json
 import requests
 import os
@@ -14,12 +13,6 @@ source_NatGas = requests.get(url)
 
 #Format data into useable json format
 data_NatGas = json.loads(source_NatGas.text)
-
-#Make dataframes from the json data
-df_NatGas = pd.DataFrame(data = data_NatGas['series'][0]['data'], columns=['Date', 'MMcf'] )
-
-#Dates read from api as strings. Convert to datetime
-df_NatGas['Date'] = pd.to_datetime(df_NatGas['Date'], format='%Y%m')
 
 #Update database if needed
 
