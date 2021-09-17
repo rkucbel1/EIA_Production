@@ -1,5 +1,4 @@
 #EIA Production and Inventory
-import pandas as pd
 import json
 import requests
 import os
@@ -20,14 +19,6 @@ source_imports = requests.get(url)
 #Format data into useable json format
 data_crude = json.loads(data_crude.text)
 data_imports = json.loads(source_imports.text)
-
-#Make dataframes from the json data
-df_crude = pd.DataFrame(data = data_crude['series'][0]['data'], columns=['Date', 'Mbbls/D'] )
-df_imports = pd.DataFrame(data = data_imports['series'][0]['data'], columns=['Date', 'Mbbls/D'] )
-
-#Dates read from api as strings. Convert to datetime
-df_crude['Date'] = pd.to_datetime(df_crude['Date'], format='%Y%m')
-df_imports['Date'] = pd.to_datetime(df_imports['Date'], format='%Y%m')
 
 #Update the database if needed
 
